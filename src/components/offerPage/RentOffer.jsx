@@ -73,7 +73,7 @@ const RentOffer = ({ offerData }) => {
   const commentSubmitHandler = () => {
     setLoading(true);
     axios
-      .post('${BASE_API}/oferty/add/komentarz', {
+      .post(`${BASE_API}/oferty/add/komentarz`, {
         data: new Date(),
         idUzytkownika: authCtx.userId,
         idOferty: offerData.id,

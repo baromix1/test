@@ -44,41 +44,34 @@ const AuthPage = () => {
     setShowPassword(false);
   };
 
-  const submitHandler = async () => {
+  const submitHandler = () => {
     setLoading(true);
     console.log("Login: " + login + ", hasło: " + password);
 
-    const userData = await axios.post(`${BASE_API}/uzytkownik/login`, {
-      username: login,
-      password: password,
-    });
-
-    if (userData === null) {
-      setLoading(false);
-      console.log("Brak połączenia z bazą");
-    }
-
-    if (userData.status !== 200) {
-      setLoading(false);
-      console.log("Nie udalo sie zalogowac uzytkownika!");
-      console.log(userData.data);
-
-      setInputValid(false);
-      return;
-    }
-    setLoading(false);
-    setUserData(userData.data);
-
-    if (userData.data.typ === "superadmin") {
-      authCtx.login(userData.data.id, login, null, null, userData.data.typ);
-      navigate("/super-admin");
-      return;
-    }
-
-    setCommunityList(userData.data.listaWspolnot);
-    setChoosenCommunity(userData.data.listaWspolnot[0].id);
-    setSelectCommunity(true);
-    console.log(userData);
+    axios
+      .post(`${BASE_API}/uzytkownik/login`, {
+        username: login,
+        password: password,
+      })
+      .then((userData) => {
+        setUserData(userData.data);
+        setCommunityList(userData.data.listaWspolnot);
+        setChoosenCommunity(userData.data.listaWspolnot[0].id);
+        setSelectCommunity(true);
+        console.log(userData);
+        if (userData.data.typ === "superadmin") {
+          authCtx.login(userData.data.id, login, null, null, userData.data.typ);
+          navigate("/super-admin");
+          return;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setInputValid(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const communityChangeHandler = (e) => {

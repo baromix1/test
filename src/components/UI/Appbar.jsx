@@ -43,6 +43,22 @@ const Appbar = () => {
               </Button>
               <Button
                 onClick={() => {
+                  navigate(`/forum`);
+                }}
+                sx={{ color: theme.palette.background.default }}
+              >
+                Forum
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate(`/chat`);
+                }}
+                sx={{ color: theme.palette.background.default }}
+              >
+                Chat
+              </Button>
+              <Button
+                onClick={() => {
                   navigate(`/profile/${authCtx.userId}`);
                 }}
                 sx={{ color: theme.palette.background.default }}

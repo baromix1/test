@@ -4,13 +4,17 @@ import "./App.css";
 import { useContext, useEffect } from "react";
 import AuthContext from "./store/auth-context";
 import WallPage from "./pages/WallPage";
+import ChatPage from "./pages/ChatPage";
 import AuthPage from "./pages/AuthPage";
 import ErrorPage from "./pages/ErrorPage";
 import OfferPage from "./pages/OfferPage";
 import Appbar from "./components/UI/Appbar";
 import ProfilePage from "./pages/ProfilePage";
+import ForumPage from "./pages/ForumPage";
+import PostPage from "./pages/PostPage";
 import TransactionsHistoryPage from "./pages/TransactionsHistoryPage";
 import CreateOfferPage from "./pages/CreateOfferPage";
+import CreatePostPage from "./pages/CreatePostPage";
 import AdminPage from "./pages/AdminPage";
 import SuperAdminPage from "./pages/SuperAdminPage";
 import CreateUserForm from "./components/adminPage/CreateUserForm";
@@ -160,6 +164,16 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
+        path: "/forum",
+        element: <ForumPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/Chat",
+        element: <ChatPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
         path: "/my-offers",
         element: <MyOffersPage />,
         errorElement: <ErrorPage />,
@@ -172,6 +186,16 @@ const router = createBrowserRouter([
       {
         path: "/wall/create-offer",
         element: <CreateOfferPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/forum/create-post",
+        element: <CreatePostPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/forum/:postId",
+        element: <PostPage />,
         errorElement: <ErrorPage />,
       },
       {

@@ -72,10 +72,10 @@ const ServiceOffer = ({ offerData }) => {
   const commentSubmitHandler = () => {
     setLoading(true);
     axios
-      .post(`${BASE_API}/oferty/add/komentarz`, {
+      .post('${BASE_API}/oferty/add/komentarz', {
         data: new Date(),
-        username: authCtx.username,
-        idKomentarza: offerData.id + Math.random(),
+        idUzytkownika: authCtx.userId,
+        idOferty: offerData.id,
         tresc: comment.trim(),
       })
       .then((res) => {
